@@ -13,6 +13,7 @@ import  ejs from 'ejs';
 import { fileURLToPath } from 'url';
 import path from 'path';
 
+
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
@@ -21,33 +22,18 @@ const port = 3000;
 const saltRounds = 10;
 env.config();
 
-// Redis setup
-import redis from "redis";
-import connectRedis from "connect-redis";
-const RedisStore = connectRedis(session);
-const redisClient = redis.createClient({
-  url: process.env.REDIS_URL
-});
 
-redisClient.connect().catch(console.error);
 
-// Session configuration
 app.use(
   session({
-    store: new RedisStore({ client: redisClient }),
     secret: process.env.SESSION_SECRET,
-    resave: false, // don’t save session if unmodified
-    saveUninitialized: false, // don’t create session until something is stored
-    cookie: {
-      secure: false, // Set to true if using HTTPS
-      maxAge: 1000 * 60 * 60 * 24 // 1 day
-    }
+    resave: false,
+    saveUninitialized: true,
   })
 );
 
 app.use(passport.initialize());
 app.use(passport.session());
-
 
 const db = new pg.Client({
   user: process.env.PG_USER,

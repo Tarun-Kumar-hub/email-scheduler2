@@ -54,8 +54,8 @@ const mailTransport = nodemailer.createTransport({
   port: 587, // Port for TLS (use 465 if you want SSL)
   secure: false, // Set to true if using port 465
   auth: {
-    user: credentials.brevo.user, // Brevo API key
-    pass: credentials.brevo.password // Brevo API key
+    user: process.env.BREVO_USER, // Brevo API key
+    pass: process.env.BREVO_PASSWORD // Brevo API key
   }
 });
 

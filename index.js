@@ -126,19 +126,19 @@ schedule.scheduleJob('0 9 * * 6', async function() {
 });
 
 // Example of a job running every 1 minute (for testing purposes)
-schedule.scheduleJob('*/1 * * * *', async function() {
- try {
-    const users = await db.query("SELECT id, email FROM users");
-    console.log(users.rows)
-    for (const user of users.rows) {
-      await sendEmail(user);
+//schedule.scheduleJob('*/1 * * * *', async function() {
+ //try {
+   // const users = await db.query("SELECT id, email FROM users");
+   // console.log(users.rows)
+   // for (const user of users.rows) {
+     // await sendEmail(user);
       
-    }
-    console.log('Task running every Saturday at 9:00 AM!');
-  } catch (error) {
-    console.error('Error in scheduled job:', error);
-  }
-}); 
+   // }
+   // console.log('Task running every Saturday at 9:00 AM!');
+ // } catch (error) {
+   //console.error('Error in scheduled job:', error);
+ // }
+//}); 
 
 //let totalCorrect = 0;
 

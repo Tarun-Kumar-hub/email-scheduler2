@@ -36,13 +36,24 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 const db = new pg.Client({
-  user: process.env.PG_USER,
-  host: process.env.PG_HOST,
-  database: process.env.PG_DATABASE,
-  password: process.env.PG_PASSWORD,
-  port: process.env.PG_PORT,
+  connectionString: process.env.DATABASE_URL,
+  ssl: {
+    rejectUnauthorized: false, // Required for Render-hosted PostgreSQL
+  },
 });
-db.connect();
+
+db.connect((err) => {
+  if (err) {
+    console.error("Failed to connect to the database:", err.stack);
+  } else {
+    console.log("Connected to the database successfully!");
+  }
+});
+
+console.log("Database connection parameters:", {
+  connectionString: process.env.DATABASE_URL,
+});
+
 
 let items = [
   { id: "30", task: "drinking" },

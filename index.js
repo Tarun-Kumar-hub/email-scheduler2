@@ -127,11 +127,11 @@ schedule.scheduleJob('0 9 * * 6', async function() {
 
 // Example of a job running every 1 minute (for testing purposes)
 schedule.scheduleJob('*/1 * * * *', async function() {
-try {//   const users = await db.query("SELECT id, email FROM users");
+ try {//   const users = await db.query("SELECT id, email FROM users");
    for (const user of users.rows) {
-    await sendEmail(user);//   }
+     await sendEmail(user);//   }
    console.log('Running task every 1 minute');
- } catch (error) {
+ }} catch (error) {
    console.error('Error in scheduled job:', error);
  }
 }); 

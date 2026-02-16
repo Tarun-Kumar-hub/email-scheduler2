@@ -1,7 +1,32 @@
 <h3>List of items to bring from home:</h3>
 <br>
-<ol>
-  <% listItems.forEach((item)=>{ %>
-  <li><%= item.task %></li>
-  <% });%>
-</ol>
+<table border="1" cellpadding="10" cellspacing="0" style="border-collapse: collapse; width: 100%; text-align: left;">
+  <thead>
+    <tr>
+      <th style="background-color: #f2f2f2;">Task</th>
+      <th style="background-color: #f2f2f2;">Priority</th>
+      <th style="background-color: #f2f2f2;">Category</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% listItems.forEach((item) => { %>
+      <tr>
+        <td><%= item.task %></td>
+        <td>
+          <% if (item.priority) { %>
+            <% if (item.priority == 5) { %> Urgent <% } %>
+            <% if (item.priority == 4) { %> High <% } %>
+            <% if (item.priority == 3) { %> Medium <% } %>
+            <% if (item.priority == 2) { %> Low <% } %>
+            <% if (item.priority == 1) { %> Very Low <% } %>
+          <% } else { %> N/A <% } %>
+        </td>
+        <td>
+          <% if (item.category) { %>
+            <%= item.category %>
+          <% } else { %> N/A <% } %>
+        </td>
+      </tr>
+    <% }); %>
+  </tbody>
+</table>

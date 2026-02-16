@@ -1,17 +1,23 @@
-<%- include('partials/header') %>
+<%- include('partials/header1.ejs'); -%>
 
-
-<div class="jumbotron centered">
-  <div class="container">
-    <i class="fas fa-key fa-6x"></i>
-    <h1 class="display-3">Home2Dorm</h1>
-    <p class="lead">Your Essential Packlist, Delivered Weekly!</p>
-    <hr>
-    
-    <a class="btn btn-light btn-lg" href="/auth/google" role="button"><i class="fab fa-google"></i>&ensp; Register with Google</a>
+<div class="home">
   
-    <a class="btn btn-dark btn-lg" href="/auth/google" role="button"><i class="fab fa-google"></i>&ensp;Login with Google</a>
+  <section class="weekly-list">
+    <div class="container"><h1>Welcome to Home2Drom </h1>
+      <h2>Weekly Hostel Essentials</h2>
+      <p>At Home2Drom, we understand the challenges of living away from home. To make your life easier, we provide a weekly email service with a curated list of essential items to bring from home to your hostel. This helps you stay organized and ensures you never forget anything important. Here's how we do it:</p>
+  
+      <h3>How It Works:</h3>
+      <ul>
+        <li><strong>Personalized Weekly Lists:</strong> Every week, we send you a customized list of items you should bring to the hostel, based on your living situation and preferences.</li>
+        <li><strong>Item Categories:</strong> Items are organized by categories such as toiletries, food, study materials, and personal care. This makes it easy to prioritize what to pack for the week.</li>
+        <li><strong>Convenience & Reminders:</strong> Receive reminders directly to your inbox every week to ensure you don’t miss out on important items, saving you from unnecessary trips to the store.</li>
+      </ul>
+  
+    </div>
+  </section>
+  <a href="/do" class="btn">Go to Tasks</a>
+  <a href="/about" class="btn btn-secondary">Learn More</a>
+</div>
 
-
-
-<%- include('partials/footer') %>
+<%- include('partials/footer1.ejs'); -%>

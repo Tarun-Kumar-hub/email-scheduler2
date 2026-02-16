@@ -1,15 +1,78 @@
+/* Global styles for the body and container */
 body {
-  background-color: #81ecec;
+  font-family: 'Arial', sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f1f1f1;
 }
 
-.centered {
-  padding-top: 200px;
+.jumbotron {
+  background-color: #f8f9fa;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  padding: 50px 20px;
+  margin-top: 50px;
+  
+}
+
+.jumbotron .container {
   text-align: center;
 }
 
-.secret-text {
-  text-align: center;
-  font-size: 2rem;
-  color: #fff;
-  background-color: #000;
+/* FontAwesome icon style */
+.fas.fa-key {
+  color: #28a745;
+}
+
+/* Heading and paragraph styling */
+h1.display-3 {
+  font-size: 3rem;
+  font-weight: bold;
+  color: #343a40;
+}
+
+p.lead {
+  font-size: 1.5rem;
+  color: #6c757d;
+}
+
+hr {
+  border-top: 1px solid #e9ecef;
+  margin: 30px 0;
+}
+
+/* Button styling */
+.btn {
+  border-radius: 25px;
+  font-size: 1.1rem;
+  padding: 15px 30px;
+  transition: all 0.3s ease;
+}
+
+.btn-success {
+  background-color: #28a745;
+  color: white;
+}
+
+.btn-dark {
+  background-color: #343a40;
+  color: white;
+}
+
+/* Hover effect for buttons */
+.btn:hover {
+  opacity: 0.9;
+  transform: scale(1.05);
+}
+
+.d-flex {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Additional spacing for buttons */
+.mx-2 {
+  margin-left: 10px;
+  margin-right: 10px;
 }

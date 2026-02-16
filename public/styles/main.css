@@ -1,174 +1,492 @@
-/* General Reset */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-/* Body Styling */
+/* General Styling */
 body {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-family: Arial, sans-serif;
-  background-color: #f4f4f4;
+  font-family: 'Roboto', sans-serif;
+  background-color: #f9f9f9;
+  margin: 0;
+  padding: 0;
   color: #333;
-  margin: 0;
-  padding: 0;
-}
-.add{
-  margin: 0;
-  padding: 0;
 }
 
-/* Container for Add Form */
-.add {
+/* Header Styling */
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 20px;
+  background-color: #4caf50;
+  color: white;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  position: relative;
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+}
+
+.user-photo {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  margin-right: 15px;
+  border: 2px solid white;
+}
+
+.user-name {
+  font-size: 1.4rem;
+  font-weight: bold;
+}
+
+.navbar {
+  display: flex;
+  gap: 20px;
+}
+
+.navbar a {
+  text-decoration: none;
+  font-size: 1.2rem;
+  color: white;
+  padding: 10px;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+
+.navbar a:hover {
+  background-color: #388e3c;
+}
+
+.logout-btn {
+  
+  background-color: #e53935;
+  color: white;
+  padding: 8px 15px;
+  border-radius: 5px;
+  font-size: 1rem;
+  cursor: pointer;
+  border: none;
+  transition: background-color 0.3s ease;
+}
+
+.logout-btn:hover {
+  background-color: #c62828;
+}
+
+
+/* Add Task Section */
+.add-task-form {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  gap: 20px; /* Space between fields */
+  max-width: 400px;
+  margin: 30px auto; /* Added top margin for spacing */
   padding: 20px;
+  border: 1px solid #ccc;
   border-radius: 8px;
-  background-color: #fff;
-  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-  width: 100%;
-  max-width: 400px; /* Responsive max-width */
+  background-color: #f9f9f9;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+.send-task-form{
+  display: flex;
+  flex-direction: column;
+  background-color: #c62828;
+
+  gap: 10px; /* Space between fields */
+  max-width: 400px;
+  margin: 10px auto; /* Added top margin for spacing */
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+.send-btn{
+ padding: 10px 15px;
+background-color: #c62828;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s;
 }
 
-/* Add Item Input */
-.add-item {
-  padding: 12px;
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group label {
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+.form-group input,
+.form-group select {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+  border-color: #388e3c;
+  outline: none;
+  box-shadow: 0 0 5px  #388e3c;
+}
+
+.add-btn {
+  padding: 10px 15px;
+  background-color: #388e3c;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s;
+}
+
+.add-btn:hover {
+  background-color:#388e3c;
+}
+
+/* Task Display Section */
+/* Container for tasks */
+.tasks {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  padding: 15px;
+  margin: 15px auto;
+  padding-right: 2rem;
+  width: 90%;
+  max-width: 700px;
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Paragraph styling */
+.tasks p {
+  margin: 0;
+  font-size: 1.1rem;
+  font-weight: bold;
+  flex: 1;
+}
+
+/* Priority and category colors */
+.priority {
+  font-size: 0.9rem;
+  font-style: italic;
+  color: #FF9800; /* Orange for Priority */
+}
+
+.category {
+  font-size: 0.9rem;
+  font-style: italic;
+  color: #3F51B5; /* Blue for Category */
+}
+
+/* Button for tick */
+.tick-btn {
+  background-color: #4caf50; /* Green background */
+  color: white;
+  border: none;
+  border-radius: 50%; /* Circular button */
+  padding: 10px 15px; /* Adjust padding for size */
+  font-size: 18px; /* Font size for the checkmark */
+  cursor: pointer;
+  display: flex; /* Flexbox for centering */
+  align-items: center; /* Center content vertically */
+  justify-content: center; /* Center content horizontally */
+  margin: 10px auto; /* Center the button horizontally in its container */
+  transition: background-color 0.3s ease;
+}
+
+.tick-btn:hover {
+  background-color: #388e3c; /* Darker green on hover */
+}
+
+/* Optional: Adjust hidden behavior */
+.tick-btn[hidden] {
+  display: none; /* Ensure hidden buttons are not visible */
+}
+
+/* General button styling */
+button {
+  border: none;
+  font-size: 1.5rem;
+  background: transparent;
+  cursor: pointer;
+  transition: transform 0.3s;
+}
+
+button:hover {
+  transform: scale(1.2);
+}
+
+/* Form Inputs and Select */
+.tasks input[type="text"], .tasks select {
   width: 100%;
-  border: 2px solid #ccc;
+  padding: 8px;
+  margin: 5px 0;
+  border: 1px solid #ccc;
   border-radius: 5px;
+  font-size: 1rem;
+}
+
+/* Make the layout responsive for smaller screens */
+@media (max-width: 1024px) {
+  .tasks {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 10px;
+  }
+
+  .tasks p {
+    font-size: 1rem;
+    margin-bottom: 5px;
+  }
+
+  .priority, .category {
+    font-size: 0.85rem;
+  }
+
+  .tick-btn {
+    font-size: 0.9rem;
+    padding: 8px 15px;
+  }
+}
+
+/* Mobile devices styling */
+@media (max-width: 768px) {
+  /* Stack all elements vertically for smaller screens */
+  .tasks {
+    width: 100%;
+    padding: 10px;
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  /* Adjust paragraph text size and layout */
+  .tasks p {
+    font-size: 1rem;
+    margin-bottom: 10px;
+  }
+
+  /* Make the button smaller and easier to click */
+  .tick-btn {
+    font-size: 0.9rem;
+    padding: 8px 15px;
+    width: 100%;
+  }
+
+  /* Input fields full width */
+  .tasks input[type="text"], .tasks select {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+
+  /* Align header text to center on small screens */
+  header {
+    flex-direction: column;
+    text-align: center;
+    padding: 10px;
+  }
+
+  .tasks {
+    align-items: center;
+    padding: 10px;
+  }
+}
+
+/* Extra small mobile devices (below 600px) */
+@media (max-width: 600px) {
+  .tasks {
+    padding: 5px;
+  }
+
+  .tick-btn {
+    font-size: 0.8rem;
+    padding: 6px 12px;
+    width: 100%;
+  }
+
+  .tasks input[type="text"], .tasks select {
+    padding: 6px;
+    font-size: 0.9rem;
+  }
+}
+
+
+
+/* Homepage Styles */
+.home {
+  text-align: center;
+  padding: 50px 20px;
+}
+
+.home h1 {
+  font-size: 2.5rem;
+  color: #4CAF50;
+}
+
+.home p {
+  font-size: 1.2rem;
+  margin: 20px 0;
+}
+
+.home .btn {
+  display: inline-block;
+  padding: 10px 20px;
+  color: white;
+  background-color: #4CAF50;
+  border-radius: 5px;
+  text-decoration: none;
+  margin: 10px;
+}
+
+.home .btn-secondary {
+  background-color: #9E9E9E;
+}
+
+.home .btn:hover {
+  opacity: 0.9;
+}
+
+/* About Page Styles */
+.about {
+  text-align: center;
+  padding: 50px 20px;
+}
+
+.about h1 {
+  font-size: 2.5rem;
+  color: #4CAF50;
+}
+
+.about p {
+  font-size: 1.2rem;
+  margin: 20px 0;
+}
+
+
+
+
+.priority {
+  font-size: 0.9rem;
+  font-style: italic;
+  color: #FF9800; /* Orange for Priority */
+}
+
+.category {
+  font-size: 0.9rem;
+  font-style: italic;
+  color: #3F51B5; /* Blue for Category */
+}
+
+
+/* Weekly List Section */
+.weekly-list {
+  background-color: #fff;
+  padding: 30px 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  margin-top: 20px;
+}
+
+.weekly-list h2 {
+  font-size: 28px;
+  color: #4CAF50;
+  margin-bottom: 15px;
+}
+
+.weekly-list p {
+  font-size: 16px;
+  margin-bottom: 15px;
+  line-height: 1.6;
+}
+
+.weekly-list h3 {
+  font-size: 22px;
+  color: #333;
+  margin-top: 20px;
+}
+
+.weekly-list ul {
+  list-style-type: none;
+  margin-left: 20px;
+}
+
+.weekly-list li {
   font-size: 16px;
   margin-bottom: 10px;
 }
 
-/* Add Button */
-button.add {
-  padding: 12px;
-  width: 100%;
+.weekly-list li strong {
+  color: #4CAF50;
+}
+
+
+.about {
+  background-color: #f0f8ff;
+  padding: 40px 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin-top: 40px;
+}
+
+.about h2 {
+  font-size: 32px;
+  color: #4CAF50;
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+.about h3 {
+  font-size: 24px;
+  color: #333;
+  margin-top: 20px;
+}
+
+.about p {
+  font-size: 16px;
+  color: #555;
+  line-height: 1.6;
+  margin-bottom: 20px;
+}
+
+.about ul {
+  list-style-type: disc;
+  margin-left: 20px;
+  font-size: 16px;
+  color: #333;
+}
+
+.about li {
+  margin-bottom: 10px;
+}
+
+.about .cta-button {
+  display: inline-block;
   background-color: #4CAF50;
   color: white;
-  border: none;
-  border-radius: 5px;
-  font-size: 18px;
-  cursor: pointer;
-}
-
-button.add:hover {
-  background-color: #45a049;
-}
-
-/* General Reset */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-/* Body Styling */
-body {
-  font-family: Arial, sans-serif;
-  background-color: #f0f4f8;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh;
-}
-
-/* Task Container */
-.tasks {
-  background-color: #fff;
-  padding: 10px;
-  margin-left: 0%;
-  margin-right: 0%;
-  margin-top: 10px;
-  margin-bottom: 10px;
-  border-radius: 10px;
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  max-width: 600px; /* Set a max width for better alignment */
-  width: 100%;
-}
-
-/* Inline Form */
-.inline-form {
-  display: inline;
-}
-
-/* Task Name */
-.task-name {
-  font-size: 18px;
-  flex-grow: 1; /* Takes up the remaining space between buttons */
-  padding-left: 15px;
-  color: #333;
-  word-wrap: break-word; /* Break long text */
-}
-
-/* Checkbox Styling */
-.tasks input[type="checkbox"] {
-  width: 18px;
-  height: 18px;
-  cursor: pointer;
-  margin-right: 10px;
-}
-
-/* Edit Button and Checkmark */
-.tasks button.edit-btn {
-  background: none;
-  border: none;
-  cursor: pointer;
-  font-size: 18px;
-  color: #007bff;
-  transition: color 0.3s ease;
-  margin-left: 10px;
-}
-
-.tasks button.edit-btn:hover {
-  color: #0056b3; /* Darker blue on hover */
-}
-.tick-btn {
-  background-color: green; /* Green background */
-  border: none;
-  color: white;
-  padding: 8px 12px;
-  border-radius: 5px;
-  cursor: pointer;
-  font-size: 18px;
-  transition: background-color 0.3s ease;
-}
-
-
-/* Responsive Design */
-@media (max-width: 600px) {
-  .task-name {
-    font-size: 16px;
-  }
-
-  .tasks button {
-    font-size: 14px;
-  }
-}
-
-/* Positioning and styling the logout button */
-.logout-btn {
-  position: absolute;
-  top: 20px;
-  left: 20px;
   padding: 10px 20px;
-  background-color: #f8f9fa; /* Light background */
-  color: #333; /* Dark text */
+  font-size: 16px;
   text-decoration: none;
-  font-weight: bold;
-  border: 2px solid #333;
-  border-radius: 5px;
-  transition: all 0.3s ease;
+  border-radius: 4px;
+  margin-top: 20px;
+  transition: background-color 0.3s;
+  text-align: center;
 }
 
-.logout-btn:hover {
-  background-color: #333; /* Dark background on hover */
-  color: #f8f9fa; /* Light text on hover */
+.about .cta-button:hover {
+  background-color: #388e3c;
+}
+
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0 20px;
 }

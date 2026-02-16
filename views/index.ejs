@@ -1,46 +1,117 @@
 <%- include('partials/header1.ejs'); -%>
+<form action="/send" method="post" class="send-task-form">
+<div class="form-group">
+      <button class="send-btn" type="submit" name="list">📧 Send Task List to Email </button>
+    </div>
+  </form>
 
-<header>
-  <a href="/logout" class="logout-btn" role="button">Logout</a>
-</header>
-
+  <% if (emailSent) { %>
+  <center style="color: green;"><p>✅ Email sent successfully!</p></center></p>
+<% } %>
+<!-- Add Task Section -->
 <div class="add">
-  <form action="/add" method="post">
-  <input type="text" class="add-item" name="new_item" placeholder="New Task"  autofocus="true">
-  <button class="add" type="submit" name="list">+</button>
-</form>
+  <form action="/add" method="post" class="add-task-form">
+    <!-- Task Input -->
+    <div class="form-group">
+      <label for="new_item">New Task:</label>
+      <input type="text" id="new_item" class="add-item" name="new_item" placeholder="New Task" autofocus="true" required>
+    </div>
+
+    <!-- Priority Dropdown -->
+    <div class="form-group">
+      <label for="priority">Priority:</label>
+      <select name="priority" id="priority" required>
+        <option value="1">Low</option>
+        <option value="2">Medium</option>
+        <option value="3">High</option>
+        <option value="4">Critical</option>
+        <option value="5">Urgent</option>
+      </select>
+    </div>
+
+    <!-- Category Input -->
+    <div class="form-group">
+      <label for="category">Category:</label>
+      <input type="text" id="category" name="category" placeholder="Category (e.g., Work)">
+    </div>
+
+    <!-- Submit Button -->
+    <div class="form-group">
+      <button class="add-btn" type="submit" name="list">Add Task</button>
+    </div>
+    
+  </form>
 </div>
 
-<% listItems.forEach((item)=>{ %>
 
+<!-- Display Task List -->
+<% listItems.forEach((item) => { %>
+  <div class="tasks">
+    <!-- Delete Task -->
+    <form action="/delete" method="post">
+      <input type="checkbox" onchange="this.form.submit()" name="deleteItemId" value="<%= item.id %>">
+    </form>
 
-<div class="tasks">
-<form action="/delete" method ="post">
-  <input type="checkbox" onchange="this.form.submit()"  name ="deleteItemId" value="<%= item.id %>">
-</form>
+    <!-- Task Details -->
+    <p id="title<%= item.id %>">
+      <%= item.task %> 
+      <!-- Priority and Category Display -->
+      <span class="priority">[Priority: 
+        <% if (item.priority === 5) { %> Urgent <% } 
+        else if (item.priority === 4) { %> Critical <% } 
+        else if (item.priority === 3) { %> High <% } 
+        else if (item.priority === 2) { %> Medium <% } 
+        else { %> Low <% } %> ]
+      </span>
+      <% if (item.category) { %>
+        <span class="category">[Category: <%= item.category %>]</span>
+      <% } %>
+    </p>
 
-<p id="title<%= item.id %>">
-<%= item.task %>
-</p>
+    <!-- Edit Task -->
+    <form action="/edit" method="post">
+      <input type="hidden" id="<%= item.id %>" class="input" name="editItemId" value="<%= item.id %>">
 
-<form action="/edit" method="post">
-  <input type="hidden" id="<%= item.id %>" class="input" name="editItemId" value="<%= item.id %>">
+      <!-- Editable Task Input -->
+      <input type="text" id="done<%= item.id %>" class="input" name="updatedTitle" value="<%= item.task %>" hidden="true" autocomplete="off" autofocus="true" required>
+      
+      <!-- Editable Priority -->
+      <label for="editPriority<%= item.id %>" hidden="true" id="labelPriority<%= item.id %>">Priority:</label>
+      <select name="updatedPriority" id="editPriority<%= item.id %>" class="edit-priority" hidden="true">
+        <option value="1" <%= item.priority === 1 ? 'selected' : '' %>>Low</option>
+        <option value="2" <%= item.priority === 2 ? 'selected' : '' %>>Medium</option>
+        <option value="3" <%= item.priority === 3 ? 'selected' : '' %>>High</option>
+        <option value="4" <%= item.priority === 4 ? 'selected' : '' %>>Critical</option>
+        <option value="5" <%= item.priority === 5 ? 'selected' : '' %>>Urgent</option>
+      </select>
 
-  <input type="text" id="done<%=item.id%>" class="input" name="updatedTitle" value="<%= item.task %>" hidden="true" autocomplete="off" autofocus="true" >
-  
-  <button type="submit" id="updated<%= item.id %>" class="edit tick-btn" name="edit" hidden="true">✔</button>
-</form>
-  <button  id="edit<%=item.id%>"  name="edit" onclick="handle('<%= item.id %>')">✏️</button>
+      <!-- Editable Category -->
+      <label for="editCategory<%= item.id %>" hidden="true" id="labelCategory<%= item.id %>">Category:</label>
+      <input type="text" name="updatedCategory" id="editCategory<%= item.id %>" class="input" value="<%= item.category %>" hidden="true" />
 
+      <button type="submit" id="updated<%= item.id %>" class="edit tick-btn" name="edit" hidden="true">✔</button>
+    </form>
 
-</div>
-<% });%>
+    <button id="edit<%= item.id %>" name="edit" onclick="handle('<%= item.id %>')">✏️</button>
+  </div>
+<% }); %>
+
 <script>
-  function handle(id){
-    document.getElementById("title"+id).setAttribute("hidden",true);
-    document.getElementById("edit"+id).setAttribute("hidden",true);
-    document.getElementById("updated"+id).removeAttribute("hidden");
-    document.getElementById("done"+id).removeAttribute("hidden");
+  function handle(id) {
+    // Hide original task title and edit button
+    document.getElementById("title" + id).setAttribute("hidden", true);
+    document.getElementById("edit" + id).setAttribute("hidden", true);
+
+    // Show editable inputs and save button
+    document.getElementById("done" + id).removeAttribute("hidden");
+    document.getElementById("updated" + id).removeAttribute("hidden");
+
+    // Show priority and category edit fields
+    document.getElementById("editPriority" + id).removeAttribute("hidden");
+    document.getElementById("labelPriority" + id).removeAttribute("hidden");
+    document.getElementById("editCategory" + id).removeAttribute("hidden");
+    document.getElementById("labelCategory" + id).removeAttribute("hidden");
   }
 </script>
-<%- include('partials/footer1.ejs'); -%>
+
+<%- include('partials/footer1.ejs'); -%> 
